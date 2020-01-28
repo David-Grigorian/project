@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /*?*
+Sitemap: http://mysite.ru/sitemap.xml
+
+User-agent: Goolebot
+Disallow: /*?*
+
+User-agent: Yandex
+Disallow: /*?*
+Host: http://mysite.ru/
+Sitemap: http://mysite.ru/sitemap.xml
