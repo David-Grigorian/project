@@ -1,4 +1,11 @@
 extends ../layout/main.pug
 
 block content
-  #app
+  .page
+    include ../includes/modules/sidebar.pug
+    .wrap
+      include ../includes/modules/header.pug
+      main.main
+        include ../includes/modules/search.pug
+        section.section.section-products
+          .section-products--inner

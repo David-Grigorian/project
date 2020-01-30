@@ -1,0 +1,16 @@
+@import "./utils/*";
+
+@import "./modules/*";
+
+.page {
+  width: 100%;
+  display: flex;
+}
+
+.wrap {
+  width: 80%;
+}
+
+.link-phone {
+  text-decoration: none;
+}

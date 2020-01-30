@@ -1,0 +1,20 @@
+.section-search {
+  width: 100%;
+
+  @include roboto;
+
+  &--inner {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: 2px solid rgb(153, 151, 151);
+    margin-top: 60px;
+
+    @include roboto;
+  }
+}

@@ -43,8 +43,8 @@ const paths = {
     dest: `${mainFolders.dest}`,
   },
   scripts: {
-    source: `${mainFolders.source}/js/index.{js,jsx}`,
-    watch: `${mainFolders.source}/js/**/*.{js,jsx}`,
+    source: `${mainFolders.source}${mainFolders.assets}/js/index.{js,jsx}`,
+    watch: `${mainFolders.source}${mainFolders.assets}/js/**/*.{js,jsx}`,
     dest: `${mainFolders.dest}${mainFolders.assets}/js`
   },
   styles: {
@@ -54,35 +54,46 @@ const paths = {
   },
   images: {
     source: `${mainFolders.source}${mainFolders.assets}/images/**/*.{jpg,jpeg,png,gif,tiff,svg}`,
-    // watch: paths.images.src,
+    watch: `${mainFolders.source}${mainFolders.assets}/images/**/*.*`,
     dest: `${mainFolders.dest}${mainFolders.assets}/images`
   },
   webp: {
     source: `${mainFolders.source}${mainFolders.assets}/images/**/*.{jpg,jpeg,png,tiff}`,
-    // watch: paths.webp.src,
+    watch: `${mainFolders.source}${mainFolders.assets}/images/**/*.`,
     dest: `${mainFolders.dest}${mainFolders.assets}/images`
   },
   sprites: {
     source: `${mainFolders.source}${mainFolders.assets}/images/svg/*.svg`,
-    // watch: paths.sprites.src,
+    watch: `${mainFolders.source}${mainFolders.assets}/images/**/*.`,
     dest: `${mainFolders.dest}/images/sprites/`
   },
   favicon: {
     source: `${mainFolders.source}/static/favicon.{jpg,jpeg,png,gif,tiff}`,
-    // watch: paths.favicon.src,
+    watch: `${mainFolders.source}/favicon/**/*.`,
     dest: `${mainFolders.dest}`
   },
   fonts: {
     source: `${mainFolders.source}${mainFolders.assets}/fonts/**/*.{ttf,otf,woff,woff2,svg}`,
-    // watch: paths.fonts.src,
+    watch: `${mainFolders.source}${mainFolders.assets}/fonts/**/*.*`,
     dest: `${mainFolders.dest}${mainFolders.assets}/fonts`
   },
   static: {
-    source: [`${mainFolders.source}/static/**/*.*`,
+    source: [
+      `${mainFolders.source}/static/**/*.*`,
       `${mainFolders.source}/static/.*`,
       `!${mainFolders.source}/static/favicon.*`],
-    // watch: paths.static.src,
+    watch: [
+      `${mainFolders.source}${mainFolders.assets}/fonts/**/*.*`,
+      `${mainFolders.source}${mainFolders.assets}/fonts/.*`
+    ],
     dest: `${mainFolders.dest}`
+  },
+  database: {
+    source: [
+      `${mainFolders.source}/database/**/*.*`,
+    ],
+    watch: `${mainFolders.source}/**/*.*`,
+    dest: `${mainFolders.dest}${mainFolders.assets}/database`
   }
 }
 
@@ -109,12 +120,13 @@ function server() {
   watch(paths.pug.watch, parallel(pug));
   watch(paths.styles.watch, parallel(styles));
   watch(paths.scripts.watch, parallel(scripts));
+  watch(paths.database.watch, parallel(database));
   // watch(paths.sprites.watch, parallel(sprites));
   // watch(paths.images.watch, parallel(images));
   // watch(paths.webp.watch, parallel(webp));
   // watch(paths.fonts.watch, parallel(fonts));
-  // watch(paths.static.watch, parallel(static));
-  // watch(paths.favicon.watch, parallel(favicon));
+  // watch(paths.static.watch, parallel(stat));
+  // watch(paths.favicon.watch, parallel(favicons));
 };
 
 export { gulp, paths };
@@ -128,6 +140,7 @@ import { fonts } from './gulp/fonts';
 import { sprites } from './gulp/sprites';
 import { pug } from './gulp/pug';
 import { stat } from './gulp/static';
+import { database } from './gulp/database';
 
 exports.scripts = scripts;
 exports.styles = styles;
@@ -139,6 +152,7 @@ exports.pug = pug;
 exports.stat = stat;
 exports.server = server;
 exports.fonts = fonts;
+exports.database = database;
 
-exports.dev = series(dev, parallel(scripts, styles, pug, stat, series(images, webp, favicons, sprites), fonts), parallel(server));
-exports.prod = series(prod, parallel(scripts, styles, pug, stat, series(images, webp, favicons, sprites), fonts));
+exports.dev = series(dev, parallel(scripts, styles, pug, stat, database, series(images, webp, favicons, sprites, fonts)), parallel(server));
+exports.prod = series(prod, parallel(scripts, styles, pug, stat, database, series(images, webp, favicons, sprites, fonts)));

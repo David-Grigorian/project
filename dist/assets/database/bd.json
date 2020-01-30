@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "type": "laptops"
+  },
+  {
+    "id": 1,
+    "type": "Smartphones & Gadgets"
+  },
+  {
+    "id": 1,
+    "type": "processors"
+  },
+  {
+    "id": 1,
+    "type": "RAM"
+  },
+  {
+    "id": 1,
+    "type": "video cards"
+  },
+  {
+    "id": 1,
+    "type": "ssd"
+  },
+  {
+    "id": 1,
+    "type": "hdd"
+  },
+  {
+    "id": 1,
+    "type": "monitors"
+  }
+]

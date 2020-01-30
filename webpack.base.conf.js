@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        index: `./src/js/index.js`,
+        index: `./src/assets/js/index.js`,
         // jquery: `./src/assets/vendor/js/jquery.js`
     },
     output: {
@@ -15,9 +15,9 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|vendor)/,
                 use: [
-                    //{
-                        //loader: `babel-loader`
-                    //},
+                    {
+                        loader: `babel-loader`
+                    },
                     {
                         loader: `eslint-loader`
                     }
